@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+.DS_Store
+.pio/build/project.checksum
+.pio/build/uno/idedata.json
+.vscode/c_cpp_properties.json
+.vscode/extensions.json
+.vscode/launch.json
+.pio/build/uno/.sconsign38.dblite
+.pio/build/uno/firmware.hex
+.pio/build/uno/firmware.elf
