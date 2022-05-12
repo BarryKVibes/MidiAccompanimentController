@@ -42,13 +42,8 @@ FootPedalButtonChangedHandler::FootPedalButtonChangedHandler()
 
 void FootPedalButtonChangedHandler::HandleButtonChange(Button* buttons, byte buttonIndex)
 {
-  bool isButtonDown = buttons[buttonIndex].buttonState.active;
+  bool isActive = buttons[buttonIndex].buttonState.active;
 
   // DBG_PRINT_LN("FootPedalButtonChangedHandler::HandleButtonChange() - buttons["+String(buttonIndex)+"] @ Pin "+String(buttons[buttonIndex].buttonState.pin)+"= "+String(buttons[buttonIndex].buttonState.active)+".");
-
-  // Change program upon Button Down, otherwise ignore.
-  if (isButtonDown)
-  {
-    gFootPedalSwitchChangeManager.DoSomething(buttonIndex);
-  }
+  gFootPedalSwitchChangeManager.HandleButtonChange(buttonIndex, isActive);
 }

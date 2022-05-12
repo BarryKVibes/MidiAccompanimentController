@@ -40,7 +40,7 @@ const unsigned long BaudRateMidi = 31250;
 const unsigned long BaudRateSerialMonitor = 9600;
 // const unsigned long BaudRateSerialMonitor = 115200;
 
-const int NumFootPedalButtons = 5;
+const int NumFootPedalButtons = 13;
 
 // The debounce time, in milliseconds. This is the duration to ignore button state changes.
 // It is an unsigned longs because the time, measured in milliseconds, will quickly become a bigger number than can be stored in an int.

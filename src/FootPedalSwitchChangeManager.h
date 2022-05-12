@@ -33,7 +33,11 @@ public:
 
   // This method is the default constructor.
   FootPedalSwitchChangeManager();
-  void DoSomething(int buttonIndex);
+  void HandleButtonChange(int buttonIndex, bool isActive);
+
+private:
+  void HandleStyleButtonChange(int buttonIndex, bool isActive);
+  void HandleRegistrationButtonChange(int buttonIndex, bool isActive);
 };
 
 #endif

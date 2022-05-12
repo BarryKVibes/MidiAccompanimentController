@@ -53,8 +53,13 @@ Button gFootPedalButtons[NumFootPedalButtons] = {
   // Button {ButtonState buttonState, unsigned long lastToggleTimeMs} where
   // ButtonState {active, pin, unused0, unused1, unused2}
 
+  // Style Buttons (Indexes 0..4)
   {{false, 2, 0, 0, 0}, 0}, {{false, 3, 0, 0, 0}, 0}, {{false, 4, 0, 0, 0}, 0}, {{false, 5, 0, 0, 0}, 0},
-  {{false, 6, 0, 0, 0}, 0}
+  {{false, 6, 0, 0, 0}, 0},
+
+  // Registration Buttons (Indexes 5..12)
+  {{false, 8, 0, 0, 0}, 0}, {{false, 9, 0, 0, 0}, 0}, {{false, 10, 0, 0, 0}, 0}, {{false, 11, 0, 0, 0}, 0},
+  {{false, 12, 0, 0, 0}, 0}, {{false, 13, 0, 0, 0}, 0}, {{false, 14, 0, 0, 0}, 0}, {{false, 15, 0, 0, 0}, 0}
   };
 
 ButtonsManager* pButtonsManager = new ButtonsManager(gFootPedalButtons);
