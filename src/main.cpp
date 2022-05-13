@@ -59,7 +59,7 @@ Button gFootPedalButtons[NumFootPedalButtons] = {
 
   // Registration Buttons (Indexes 5..12)
   {{false, 8, 0, 0, 0}, 0}, {{false, 9, 0, 0, 0}, 0}, {{false, 10, 0, 0, 0}, 0}, {{false, 11, 0, 0, 0}, 0},
-  {{false, 12, 0, 0, 0}, 0}, {{false, 13, 0, 0, 0}, 0}, {{false, 14, 0, 0, 0}, 0}, {{false, 15, 0, 0, 0}, 0}
+  {{false, 12, 0, 0, 0}, 0}, {{false, A0, 0, 0, 0}, 0}, {{false, A1, 0, 0, 0}, 0}, {{false, A2, 0, 0, 0}, 0}
   };
 
 ButtonsManager* pButtonsManager = new ButtonsManager(gFootPedalButtons);
@@ -86,7 +86,7 @@ void setup()
 // This function is called repeatedly.
 void loop()
 {
-  pButtonsManager->ReadButtons(gFootPedalButtons, 0, 4, footPedalButtonChangedHandler);
+  pButtonsManager->ReadButtons(gFootPedalButtons, 0, NumFootPedalButtons - 1, footPedalButtonChangedHandler);
 
   gStatusManager.UpdateStatusIndicator();
 }

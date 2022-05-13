@@ -51,7 +51,10 @@ void FootPedalSetupManager::Setup()
   int numButtons = GetNumButtons();
   for (char i = 0; i < numButtons; i++)
   {
-    pinMode(GetButtonAt(i).buttonState.pin, INPUT_PULLUP);
+    int pinNum = GetButtonAt(i).buttonState.pin;
+
+    DBG_PRINT_LN("FootPedalSetupManager::Setup() - buttonIndex = "  + String((int)i) + "; pin = " + String(pinNum) + ".");
+    pinMode(pinNum, INPUT_PULLUP);
   }
 
   // Indicated that RH Arduino is ready.
