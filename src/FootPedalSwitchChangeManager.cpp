@@ -24,6 +24,9 @@
   
  ******************************************************************************/
 
+// This file supports two pedal boards; one with 5 switches, and one with 8 switches (two rows of four pedals).
+// The Arduino pins are specified in main.cpp.
+
 #include "lib/ArduMidi/ardumidi.h"
 
 #include "MidiAccompanimentController.h"
@@ -46,21 +49,32 @@ void FootPedalSwitchChangeManager::HandleButtonChange(int buttonIndex, bool isAc
 {
   if (buttonIndex >=0 && buttonIndex <= 4)
   {
-    HandleStyleButtonChange(buttonIndex, isActive);
+    HandleFivePedalBoardSwitchChange(buttonIndex, isActive);
   }
   else if(buttonIndex >=5 && buttonIndex <= 13)
   {
-    HandleRegistrationButtonChange(buttonIndex, isActive);
+    HandleEightPedalBoardSwitchChange(buttonIndex, isActive);
   }
 }
 
-
-void FootPedalSwitchChangeManager::HandleStyleButtonChange(int buttonIndex, bool isActive)
+// This method handles the 5-pedal board. The first four pedals select the current style's variation, and the 5th pedal sends Ending 1.
+void FootPedalSwitchChangeManager::HandleFivePedalBoardSwitchChange(int buttonIndex, bool isActive)
 {
   // TODO: Precondition buttonIndex within pedal range (e.g., 0..4).
 
-  // Send Yamaha SX-700/900 SysEx based on which switch is pressed.
   #ifdef SEND_MIDI
+    // Index -> Switch
+    const StyleSwitchNum switchNum[NumFootPedalButtons] = {StyleSwitchNum::MainA, StyleSwitchNum::MainB, StyleSwitchNum::MainC, StyleSwitchNum::MainD, StyleSwitchNum::Ending1};
+
+    SendStyleButtonSysEx(switchNum[buttonIndex], isActive);
+  #else
+    DBG_PRINT_LN("FootPedalSwitchChangeManager::HandleFivePedalBoardSwitchChange() - buttonIndex = " + String(buttonIndex) + "; isActive = " + String(isActive) + ".");
+  #endif
+}
+
+void FootPedalSwitchChangeManager::SendStyleButtonSysEx(StyleSwitchNum switchNum, bool isSwitchOn)
+{
+  // Send Yamaha SX-700/900 SysEx based on which switch is pressed.
     // Send SysEx
     //  F0 43 7E 00 ss dd F7
     // ss = Switch Number
@@ -93,26 +107,19 @@ void FootPedalSwitchChangeManager::HandleStyleButtonChange(int buttonIndex, bool
     Serial.write(0x7E); // Style
     Serial.write(0x00);
 
-    // Index -> Switch
-    // 0 -> Intro/Ending
-    // 1 -> Style Variation
-    // 2 -> Fill In 1
-    // 3 -> Fill in 2
-    // 4 -> Start/Stop TBD: May be different SysEx; using 0x20 for now.
-    const unsigned char switchNum[NumFootPedalButtons] = {0x00, 0x08, 0x10, 0x11, 0x20};
-    const unsigned char SwitchOn = 0x7F; // TBD: What is Switch On/Off?
-    const unsigned char SwitchOff = 0x00; // TBD: What is Switch On/Off?
-    unsigned char switchOnOffByte =  isActive ? SwitchOn : SwitchOff;
-    Serial.write(switchNum[buttonIndex]); // Switch No.
+    const unsigned char SwitchOn = 0x7F; // Indicates front-panel switch is pressed.
+    const unsigned char SwitchOff = 0x00; // Indicates front-panel switch is released.
+    unsigned char switchOnOffByte =  isSwitchOn ? SwitchOn : SwitchOff;
+    Serial.write(switchNum); // Switch No.
     Serial.write(switchOnOffByte); // Switch On/Off.
     Serial.write(0xF7); // End of Exclusive
-  #else
-    DBG_PRINT_LN("FootPedalSwitchChangeManager::HandleStyleButtonChange() - buttonIndex = " + String(buttonIndex) + "; isActive = " + String(isActive) + ".");
-  #endif
-}
 
-void FootPedalSwitchChangeManager::HandleRegistrationButtonChange(int buttonIndex, bool isActive)
+
+}
+// The 8-pedal board has two rows of four pedals. The left 6 pedals choose 6 different styles. The two right pedals increment, decrement the tempos.
+void FootPedalSwitchChangeManager::HandleEightPedalBoardSwitchChange(int buttonIndex, bool isActive)
 {
+  // TODO: Precondition buttonIndex within pedal range (e.g., 5..12).
   #ifdef SEND_MIDI
   // TBD
   #else

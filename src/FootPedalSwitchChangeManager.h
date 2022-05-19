@@ -29,6 +29,32 @@
 
 class FootPedalSwitchChangeManager  {
 
+private:
+
+// The SwitchNum enum contains valid values for the Yamaha SX-700/900  Style button SysEx ss = Switch Number byte.
+// F0 43 7E 00 ss dd F7
+// 
+enum StyleSwitchNum
+{
+    Intro1 = 0x00,
+    Intro2 = 0x01,
+    Intro3 = 0x02,
+    Intro4 = 0x03,
+    MainA = 0x08,
+    MainB = 0x09,
+    MainC = 0x0A,
+    MainD = 0x0B,
+    FillInAA = 0x10,
+    FillInBB = 0x11,
+    FillInCC = 0x12,
+    FillInDD = 0x13,
+    BreakFill = 0x18,
+    Ending1 = 0x20,
+    Ending2 = 0x21,
+    Ending3 = 0x22,
+    Ending4 = 0x23
+};
+
 public:
 
   // This method is the default constructor.
@@ -36,8 +62,10 @@ public:
   void HandleButtonChange(int buttonIndex, bool isActive);
 
 private:
-  void HandleStyleButtonChange(int buttonIndex, bool isActive);
-  void HandleRegistrationButtonChange(int buttonIndex, bool isActive);
+  void HandleFivePedalBoardSwitchChange(int buttonIndex, bool isActive);
+  void HandleEightPedalBoardSwitchChange(int buttonIndex, bool isActive);
+
+  void SendStyleButtonSysEx(StyleSwitchNum styleSwitchNum, bool isSwitchOn);
 };
 
 #endif
