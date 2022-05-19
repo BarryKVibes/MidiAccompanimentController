@@ -34,7 +34,7 @@ private:
 // The SwitchNum enum contains valid values for the Yamaha SX-700/900  Style button SysEx ss = Switch Number byte.
 // F0 43 7E 00 ss dd F7
 // 
-enum StyleSwitchNum
+enum StyleSectionControlSwitchNum
 {
     Intro1 = 0x00,
     Intro2 = 0x01,
@@ -55,6 +55,17 @@ enum StyleSwitchNum
     Ending4 = 0x23
 };
 
+enum StyleNum
+{
+  Default = 258,
+  BigBandSwing = 258,
+  CoolBossa = 323,
+  VocalWaltz = 359,
+  BigBandBallad = 262,
+  AcousticJazz = 268,
+  BigBandJazz = 259
+};
+
 public:
 
   // This method is the default constructor.
@@ -65,7 +76,8 @@ private:
   void HandleFivePedalBoardSwitchChange(int buttonIndex, bool isActive);
   void HandleEightPedalBoardSwitchChange(int buttonIndex, bool isActive);
 
-  void SendStyleButtonSysEx(StyleSwitchNum styleSwitchNum, bool isSwitchOn);
+  void SendStyleSectionControlSysEx(StyleSectionControlSwitchNum switchNum, bool isSwitchOn);
+  void SendStyleNumSysEx(uint16_t styleNum);
 };
 
 #endif

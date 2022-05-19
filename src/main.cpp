@@ -58,8 +58,8 @@ Button gFootPedalButtons[NumFootPedalButtons] = {
   {{false, 6, 0, 0, 0}, 0},
 
   // The Eight-Pedal Board Buttons (Indexes 5..12)
-  {{false, 8, 0, 0, 0}, 0}, {{false, 9, 0, 0, 0}, 0}, {{false, 10, 0, 0, 0}, 0}, {{false, 11, 0, 0, 0}, 0},
-  {{false, 12, 0, 0, 0}, 0}, {{false, A0, 0, 0, 0}, 0}, {{false, A1, 0, 0, 0}, 0}, {{false, A2, 0, 0, 0}, 0}
+  {{false, 12, 0, 0, 0}, 0}, {{false, A0, 0, 0, 0}, 0}, {{false, A2, 0, 0, 0}, 0}, {{false, 11, 0, 0, 0}, 0}, 
+  {{false, A1, 0, 0, 0}, 0}, {{false, 8, 0, 0, 0}, 0}, {{false, 9, 0, 0, 0}, 0}, {{false, 10, 0, 0, 0}, 0}
   };
 
 ButtonsManager* pButtonsManager = new ButtonsManager(gFootPedalButtons);
