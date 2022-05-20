@@ -68,7 +68,7 @@ FootPedalSetupManager setupManager;
 FootPedalButtonChangedHandler footPedalButtonChangedHandler;
 MIDIEventFlasher gMIDIEventFlasher;
 StatusManager gStatusManager;
-
+FootPedalSwitchChangeManager gFootPedalSwitchChangeManager;
 
 #ifndef SEND_MIDI
 Diagnostics diagnostics;

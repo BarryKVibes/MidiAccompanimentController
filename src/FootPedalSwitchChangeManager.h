@@ -78,6 +78,16 @@ private:
 
   void SendStyleSectionControlSysEx(StyleSectionControlSwitchNum switchNum, bool isSwitchOn);
   void SendStyleNumSysEx(uint16_t styleNum);
+  void SendTempoSysEx(uint16_t tempo);
+
+  String PrependZeros(String plaintext, uint8_t numCharsWide);
+
+private:
+  const uint16_t DefaultTempo = 120;
+  const uint16_t MaxTempo = 220;
+  const uint16_t MinTempo = 30;
+  
+  uint16_t mCurTempo;
 };
 
 #endif
